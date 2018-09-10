@@ -17,6 +17,8 @@ class ArticleController
         $data = ['name' => $_POST['name'], 'years' => $_POST['years'], 'text' => $_POST['text'], 'image' => "$image"];
         $model = new ArticleModel();
         $model->addArticle($data);
+
+
 //
     }
 
@@ -32,6 +34,17 @@ class ArticleController
         include __DIR__."/../views/singIn.php";
     }
 
+    public function form()
+    {
+        include __DIR__."/../views/form.php";
+    }
+
+
+    public function logOut()
+    {
+        session_unset();
+        session_destroy();
+    }
 
 
     public function catchImage()

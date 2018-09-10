@@ -6,12 +6,12 @@ use PDO;
 class ArticleModel
 {
 
-    private $dsn = "mysql:host=127.0.0.1;dbname=mvc;charset=utf8";
-    public $pdo;
+
 
 
     public function connectDB() {
-       return $this->pdo = new PDO($this->dsn, 'root', '12369874');
+       $dsn = "mysql:host=127.0.0.1;dbname=mvc;charset=utf8";
+       return $pdo = new PDO($dsn, 'root', '12369874');
 
     }
 
@@ -20,9 +20,11 @@ class ArticleModel
     public function addArticle($data)
     {
 
-        $sql = "INSERT INTO lists(`name`, `years`, `text`, `url`) VALUES ('".$data['name']."' ,'".$data['years']."', '".$data['text']."', '".$data['image']."');";
+        $sql = "INSERT INTO lists(`name`, `years`, `text`, `url`, `userId`) VALUES ('".$data['name']."' ,'".$data['years']."', '".$data['text']."', '".$data['image']."', '".$_SESSION["userId"]."');";
         $sth = $this->connectDB()->prepare($sql);
         $sth->execute();
+        echo "Статья добавлена";
+        include __DIR__."/../views/form.php";
 
     }
 
@@ -37,24 +39,37 @@ class ArticleModel
 
     public function registrationUser($data)
     {
-        $sql = "SELECT `id` FROM users WHERE `name` = '".$data['userName']."'";
+        $userName = $data['userName'];
+        str_replace(' ','',$userName);
+        $userName = mb_strtolower($userName);
+
+        $_SESSION["userName"] = $userName;
+
+        $sql = "SELECT `id` FROM users WHERE `name` = '$userName'";
         $sth = $this->connectDB()->prepare($sql);
         $sth->execute();
         $result = $sth->fetch(PDO::FETCH_ASSOC);
         if ($result === false) {
-            $sql = "INSERT INTO users(`name`, `pass`) VALUES ('".$data['userName']."', '".$data['userPass']."');";
+            //делаем регистрацию
+            $sql = "INSERT INTO users(`name`, `pass`) VALUES ('$userName', '".$data['userPass']."');";
             $sth = $this->connectDB()->prepare($sql);
             $sth->execute();
-            echo 'Успешная регистрация';
+            //Берем id пользователя
+            $sql = "SELECT `id` FROM users WHERE `name` = '$userName'";
+            $sth = $this->connectDB()->prepare($sql);
+            $sth->execute();
+            var_dump($result["id"]);
+            echo 'Успешная регистрация '.$_SESSION["userName"]." - ".$_SESSION["userId"] ;
             include __DIR__."/../views/form.php";
         } else {
-            echo 'Пользователь '. $data['userName'] .' уже существует.';
+            echo 'Пользователь '. $userName .' уже существует.';
             include __DIR__."/../views/singUp.php";
         }
     }
 
     public function authorizationUser($data)
     {
+        $_SESSION["userName"] = $data['userName'];
         $sql = "SELECT `id` FROM users WHERE `name` = '".$data['userName']."' and `pass` = '".$data['userPass']."'";
         $sth = $this->connectDB()->prepare($sql);
         $sth->execute();
@@ -63,7 +78,9 @@ class ArticleModel
             echo 'Такого пользователя не существует';
             include __DIR__."/../views/singIn.php";
         } else {
-            echo 'Вы авторизовались';
+
+            $_SESSION["userId"] = $result["id"];
+            echo 'Вы авторизовались'.$_SESSION["userName"] . $_SESSION["userId"];
             include __DIR__."/../views/form.php";
         }
 

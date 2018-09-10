@@ -10,7 +10,7 @@
 <body>
 <form action="../../index.php?action=add" method="post" enctype="multipart/form-data">
     <span>Имя</span><br>
-    <input type="text" name="name" value="">
+    <input type="text" name="name" value="<?php echo $_SESSION["userName"] ?>">
     <br><br>
     <span>Возраст</span><br>
     <input type="number" name="years">
@@ -26,9 +26,13 @@
 </form>
 
 <br><br><br>
-<a href="/views/listPosts.php">
+<a href="/app/views/listPosts.php">
     Список статей
 </a>
+<br><br><br>
+<form action="../../index.php?action=logOut" method="post">
+    <button type="submit">Выйти</button>
+</form>
 </body>
 </html>
 
