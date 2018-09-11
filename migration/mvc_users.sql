@@ -1,0 +1,17 @@
+INSERT INTO mvc.users (id, name, pass, active) VALUES (1, '', '', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (8, 'wewe', 'wewewe', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (17, 'wewew', 'wewewe', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (19, 'wewewewew', 'wewewewew', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (35, 'weweewew', 'wewewewe', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (36, '1', '2', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (37, '2', '3', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (38, '55', '12', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (39, '555', '124', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (40, '5', '35', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (41, '6', '6', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (42, 'Stas', '12345432', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (43, 'Vasia', 'Vasia', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (44, '123', '123', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (45, '777', '777', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (46, '12345', '12345', null);
+INSERT INTO mvc.users (id, name, pass, active) VALUES (47, '1111111', '1111111', null);
