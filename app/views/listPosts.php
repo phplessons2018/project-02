@@ -6,7 +6,7 @@ $result = $controller->getArticle();
 ?>
 
     <h1>Данные из базы</h1>
-    <a href="/app/views/index.php">Добавить статью</a>
+    <a href="/app/views/form.php">Добавить статью</a>
 
 <?php foreach ($result as $post):?>
 <p><?= $post['text']?></p>
